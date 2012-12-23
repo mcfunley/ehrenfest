@@ -1,0 +1,30 @@
+<html>
+<head>
+  <title>Dan McKinley :: Ehrenfest&#39;s Urn</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  <script type="text/javascript" src="processing.min.js"></script>
+  <link rel="stylesheet" href="ehrenfest.css" type="text/css" media="screen" />
+</head>
+<body>
+  <div id="explanation">
+    <h1>Ehrenfest&#39;s Urn</h1>
+    <h3>An illustration of entropy&#39;s increase in the direction of time we call the future.</h3>
+    <p>
+      This is a simulation of two gases mixing through a small opening between 
+      two boxes. Initially very low in entropy (that is, the two distinct gases 
+      are separated), the system evolves to the higher entropy state in which the
+      gases are mixed. 
+    </p>
+    <p>
+      Created by <a href="/">Dan McKinley</a>.
+    </p>
+    <p>
+      <em>
+        Requires a browser that supports the &lt;canvas&gt; element, in 
+        other words, pretty much any browser except Internet Explorer.
+      </em>
+    </p>
+  </div>
+  <canvas id="animation" datasrc="ehrenfest.pjs" width="700" height="500"></canvas>
+</body>
+</html>

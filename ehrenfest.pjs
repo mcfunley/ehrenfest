@@ -1,0 +1,128 @@
+Urn urn = new Urn();
+
+
+class Urn {
+    int top = 0;
+    int left = 0;
+    int bottom = 500;
+    int right = 700;
+
+    int mid_x = right / 2;
+    int mid_y = bottom / 2;
+    int gap_width = 40;
+    
+    int top_gap = mid_y - (gap_width / 2);
+    int bottom_gap = mid_y + (gap_width / 2);
+
+    void update() {
+        fill(150);
+        strokeWeight(2);
+        rect(top, left, right, bottom);
+        line(mid_x, top, mid_x, top_gap);
+        line(mid_x, bottom, mid_x, bottom_gap);
+    }
+}
+
+
+class Particle {
+    int x_pos; 
+    int y_pos; 
+    int x_velocity;
+    int y_velocity; 
+    color col;
+    
+    Particle() {
+        // initially, give it a 90% chance of being on the left. 
+        int min_x = urn.left;
+        int side = random(100);
+        col = color(0, 121, 184);
+        if(side > 90) {
+            col = color(230, 80, 0);
+            min_x = urn.mid_x;
+        }
+        x_pos = random(urn.mid_x) + min_x;
+        y_pos = random(urn.bottom - urn.top);
+        x_velocity = random_velocity();
+        y_velocity = random_velocity();
+    }
+
+    int random_velocity() {
+        return 5 - random(10);
+    }
+
+    void update() {
+        fill(col);
+        stroke(col);
+        ellipse(x_pos, y_pos, 1, 1);
+        deflect();
+    }
+
+    void deflect() {
+        deflect_x();
+        deflect_y();
+    }
+
+    void deflect_x() {
+        if(x_pos <= urn.left) {
+            x_pos = urn.left;
+            x_velocity = -x_velocity;
+            x_pos += x_velocity;
+            return;
+        }
+        if(x_pos >= urn.right) {
+            x_pos = urn.right;
+            x_velocity = -x_velocity;
+            x_pos += x_velocity;
+            return;
+        }
+
+        if((x_pos > urn.mid_x && x_pos + x_velocity <= urn.mid_x) ||
+           (x_pos < urn.mid_x && x_pos + x_velocity >= urn.mid_x)) {
+
+            if(y_pos < urn.top_gap || y_pos > urn.bottom_gap) {
+                x_pos = urn.mid_x;
+                x_velocity = -x_velocity;
+                return;
+            }
+
+        }
+
+        x_pos += x_velocity;
+    }
+
+    void deflect_y() {
+        if(y_pos <= urn.top) {
+            y_pos = urn.top;
+            y_velocity = -y_velocity;
+            y_pos += y_velocity;
+            return;
+        }
+        if(y_pos >= urn.bottom) {
+            y_pos = urn.bottom;
+            y_velocity = -y_velocity;
+        }
+        y_pos += y_velocity;
+    }
+
+}
+
+
+
+Particle[] particles = new Particle[500];
+
+void setup() {
+    size(700, 500);
+    frameRate(15);
+    for(int i = 0; i < particles.length; i++) {
+        particles[i] = new Particle();
+    }
+}
+
+
+void draw() {
+    background(100);
+    urn.update();
+    for(int i = 0; i < particles.length; i++) {
+        particles[i].update();
+    }
+}

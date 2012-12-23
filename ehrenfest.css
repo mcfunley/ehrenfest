@@ -1,0 +1,28 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+html {border: none;}
+body {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    background: #F9F9F7;
+    padding: 15px;
+}
+
+#explanation h1 { 
+    color: #D35701;
+}
+
+#explanation h1, #explanation h3, #explanation p {
+    margin-bottom: 10px;
+    width: 900px;
+}
+
+a:link, a:visited, a:active, a:focus {
+    color: #0192b5;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
